@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<!--
+    Author: Shivam Singla (A00429318)
+
+    The purpose of the file is to provide the structure for displaying the
+    list of my hobbies and pastimes and a table with rankings and picture ON/OFF
+    buttons for the respective pictures.
+-->
+
+<html>
+    <head>
+        <title>
+            Passing Time
+        </title>
+        <link rel="stylesheet" href="Pastime.css">
+        <script src="Pastime.js"></script>
+    </head>
+
+    <body onload="setup()">
+        <h2>
+            My Hobbies And Pastimes
+        </h2>
+        <ol>
+            <li>Programming</li>
+            <li>Gaming</li>
+            <li>Cooking</li>
+        </ol>
+        <table>
+            <tr>
+                <th colspan="2">My Hobbies And Pastimes</th>
+            </tr>
+            <tr>
+                <td>ranking</td>
+                <td>picture ON/OFF</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><input class="button" type="button" value="Programming" onclick="progShow()"/></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><input class="button" type="button" value="Gaming" onclick="gameShow()"/></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><input class="button" type="button" value="Cooking" onclick="cookShow()"/></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <figure id="prog">
+                        <img src="Programming.jpeg" alt="Programming" width="300" height="168">
+                    </figure>
+                </td>
+                <td>
+                    <figure id="game">
+                        <img src="Gaming.jpg" alt="Gaming" width="300" height="168">
+                    </figure>
+                </td>
+                <td>
+                    <figure id="cook">
+                        <img src="Cooking.jpg" alt="Cooking" width="300" height="168">
+                    </figure>
+                </td>
+            </tr>
+        </table>
+    </body>
+
+</html>

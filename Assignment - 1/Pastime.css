@@ -1,0 +1,62 @@
+/*
+  Author: Shivam Singla (A00429318)
+  
+  It is ordered starting with HTML5 elements, followed by
+  programmer defined class section.
+*/
+
+/* HTML5 elements section */
+
+body {
+  background-color: rgb(201, 195, 235);
+  font-family: sans-serif;
+}
+
+h2 {
+  background-color: rgb(30, 32, 194);
+  color: rgb(201, 195, 235);
+  margin-top: 0px;
+  width: 1000px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+table,
+tr,
+td,
+th {
+  border: 5px solid rgb(30, 32, 194);
+  border-collapse: collapse;
+  background-color: rgb(201, 195, 235);
+  text-align: center;
+  font-size: 24px;
+  width: 1000px;
+}
+
+ol {
+  color: rgb(30, 32, 194);
+  font-size: 20px;
+}
+
+figure {
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+/* programmer defined class section*/
+
+.button {
+  background-color: rgb(201, 195, 235);
+  border: none;
+  color: rgb(30, 32, 194);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
