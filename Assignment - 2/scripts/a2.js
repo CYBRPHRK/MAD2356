@@ -1,3 +1,16 @@
+/*
+    Author: Shivam Singla (A00429318)
+
+    The purpose of this file is to provide the following behaviours:
+    - initiate the object and context variables for elevations
+        and plan(setup)
+    - to choose the correstponding function(s) according to the
+        selected option using if-else if-else statements (show)
+    - to clear the elevation and plan canvases (clear)
+    - to create an elevation design on the canvas (showElevation)
+    - to create an plan design on the canvas (showPlan)
+*/
+
 const CLEAR = "Clear";
 const SHOW_ELEVATION = "Show Elevation";
 const SHOW_PLAN = "Show Plan";

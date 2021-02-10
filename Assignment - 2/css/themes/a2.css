@@ -1,3 +1,13 @@
+/*
+  Author: Shivam Singla (A00429318)
+
+  The purpose of this file is to provide styling to the different
+  class and id elements. It is ordered starting with programmer
+  defined class section, followed by programmer defined id section.
+*/
+
+/* programmer defined class section */
+
 .ui-page,
 .ui-header {
   background: #92bb94 !important;
@@ -10,6 +20,8 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+/* programmer defined id section */
 
 #dropdown {
   margin: auto;
