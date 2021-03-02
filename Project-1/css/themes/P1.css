@@ -1,0 +1,22 @@
+/* jQuery Mobile classes              */
+/* Background colour                  */
+.ui-page,
+.ui-header {
+  background: #cedbce !important;
+}
+
+/* hide default slider text box      */
+.ui-slider-input {
+  display: none !important;
+}
+
+h1 {
+  margin: auto;
+  width: fit-content;
+}
+
+/* user-defined classes */
+.readout {
+  padding-left: 50px;
+  width: 50px;
+}
