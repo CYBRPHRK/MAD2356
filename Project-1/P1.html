@@ -39,18 +39,18 @@
                         </div>
                         <div class="ui-block-c">
                             <div id="getSelection">
-                                <select id="viewChaptersMenu" onchange="onSelect()" data-theme="c" data-mini="true">
-                                    <option value="ViewChapters">VIEW CHAPTERS</option>
-                                    <option value="VentilationDrafts">Ventilation and Drafts</option>
-                                    <option value="Insulation">Insulation</option>
-                                    <option value="SizeProportion">Size and Proportion</option>
-                                    <option value="ImmediateContext">Immediate Context</option>
-                                    <option value="ConstructionDetails">Construction Details</option>
-                                    <option value="EnergySources">Energy Sources </option>
-                                    <option value="RefrigerationCycle">Refrigeration Cycle</option>
-                                    <option value="Psychrometrics">Psychrometrics</option>
-                                    <option value="EnvironmentalImpacts">Environmental Impacts</option>
-                                    <option value="RadiationGlazing">Radiation and Glazing</option>
+                                <select id="viewChaptersMenu" onchange="onSelectViewChapters()" data-theme="c" data-mini="true">
+                                    <option value="ViewChapters" class="available">VIEW CHAPTERS</option>
+                                    <option value="VentilationDrafts" class="unavailable">Ventilation and Drafts</option>
+                                    <option value="Insulation" class="available">Insulation</option>
+                                    <option value="SizeProportion" class="unavailable">Size and Proportion</option>
+                                    <option value="ImmediateContext" class="unavailable">Immediate Context</option>
+                                    <option value="ConstructionDetails" class="unavailable">Construction Details</option>
+                                    <option value="EnergySources" class="unavailable">Energy Sources </option>
+                                    <option value="RefrigerationCycle" class="unavailable">Refrigeration Cycle</option>
+                                    <option value="Psychrometrics" class="unavailable">Psychrometrics</option>
+                                    <option value="EnvironmentalImpacts" class="unavailable">Environmental Impacts</option>
+                                    <option value="RadiationGlazing" class="unavailable">Radiation and Glazing</option>
                                 </select>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="ui-block-b">
                             <div id="getSelection">
-                                <select id="opaqueConstructionMenu" data-theme="c" data-mini="true">
+                                <select id="opaqueConstructionMenu" onchange="onSelectOpaqueConstructionMenu()" data-theme="c" data-mini="true">
                                     <option value="OpaqueConstruction">OPAQUE CONSTRUCTION WITH R or R/INCH</option>
                                     <option value="Container">Bare Container (R1)</option>
                                     <option value="Uninsulated">Plus Interior Finish, Uninsulated (R2)</option>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="ui-block-c">
                             <div>
-                                <input id="opaqueThicknessSld" class="slider" type="range" min="0" max="100" value="0" data-theme="c" data-track-theme="c" data-highlight="true">
+                                <input id="opaqueThicknessSld" class="slider" type="range" min="2" max="14" value="2" data-theme="c" data-track-theme="c" data-highlight="true">
                                 <table>
                                     <tr>
                                         <td>
@@ -220,7 +220,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <div class="readout">
+                                            <div class="bigReadout">
                                                 <input id="annualEnergyReadout" name="annualEnergyReadout" value="">
                                             </div>
                                         </td>
@@ -237,8 +237,8 @@
                             <div id="getSelection">
                                 <select id="graphsMenu" data-theme="c" data-mini="true">
                                     <option value="Graphs">GRAPHS</option>
-                                    <option value="FirstGraph">Graph 1</option>
-                                    <option value="SecondGraph">Graph 2</option>
+                                    <option value="FirstGraph" class="unavailable">Graph 1</option>
+                                    <option value="SecondGraph" class="unavailable">Graph 2</option>
                                 </select>
                             </div>
                         </div>
@@ -246,8 +246,8 @@
                             <div id="getSelection">
                                 <select id="readoutsMenu" data-theme="c" data-mini="true">
                                     <option value="Readouts">READOUTS</option>
-                                    <option value="NetFloorArea">Net to Gross Floor Area</option>
-                                    <option value="EnergyBill">Energy Bill Per Net Floor Area</option>
+                                    <option value="NetFloorArea" class="unavailable">Net to Gross Floor Area</option>
+                                    <option value="EnergyBill" class="unavailable">Energy Bill Per Net Floor Area</option>
                                 </select>
                             </div>
                         </div>

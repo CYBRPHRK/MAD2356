@@ -20,3 +20,16 @@ h1 {
   padding-left: 50px;
   width: 50px;
 }
+
+.bigReadout {
+  padding-left: 50px;
+  width: 75px;
+}
+
+.available {
+  color: #3104fb;
+}
+
+.unavailable {
+  color: #d2cbcd;
+}

@@ -6,6 +6,7 @@
 
     The purpose of the file is to: ...
 */
+
 // global variable for Opaque Thickness
 var thickness = 0;
 // global variable for Door Thermal Resistance
@@ -14,27 +15,45 @@ var dtResistance = 0;
 var wtResistance = 0;
 // global variable for Window Area
 var windowArea = 0;
-// global hidden and visible variables
+
+/*    global variables for the canvas   */
+// Plan View
+var planObj, planCon;
+// Elevation view
+var elevationObj, elevationCon;
+
+
+// global scaling constant
+const SCL = 1.35;
+
+// global hidden and visible contants
 const HIDDEN = "hidden";
 const VISIBLE = "visible";
 
-// dropdown menu variables
-const INSULATION =  "Insulation" 
+/*    dropdown menu constants     */
+//View Chapters Menu
+const VIEWCHAPETERS = "ViewChapters";
+const INSULATION =  "Insulation";
 
+//Opaque Construction Menu
+const OPAQUECONSTRUCTION = "OpaqueConstruction";
+const CONTAINER = "Container";
+const UNINSULATED = "Uninsulated";
+const CELLULOSE = "Cellulose";
+const FIBERGLASS = "Fiberglass";
+const SPRAYFORM = "SprayFoam";
 
 /*
     The purpose of this function is to:
 */
 function setup(){
-    let drawPlanObj = document.getElementById("plan");
-    let drawPlanCon = drawPlanObj.getContext("2d");  
-    doPlan(drawPlanObj, drawPlanCon);
+    planObj = document.getElementById("plan");
+    planCon = planObj.getContext("2d");  
     
-    let drawElevationObj = document.getElementById("elevation");
-    let drawElevationCon = drawElevationObj.getContext("2d");
-    doElevation(drawElevationObj, drawElevationCon);
+    elevationObj = document.getElementById("elevation");
+    elevationCon = elevationObj.getContext("2d");
 
-        // Opaque Thickness Slider change function
+    // Opaque Thickness Slider change function
     $("#opaqueThicknessSld").on("change", function () {
         thickness = $(this).val();
 
@@ -66,22 +85,96 @@ function setup(){
     everythingHidden()
 }
 
-function doElevation(obj, context) {
+function doElevation() {
     //TEMPORARY CANVAS FOR TESTING
-    context.clearRect(0, 0, obj.width, obj.height);
+    elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
   
     // filled box
-    context.fillStyle = "#6d7590"; //purple
-    context.fillRect(0, 0, 530, 180);
+    elevationCon.fillStyle = "#6d7590"; //purple
+    elevationCon.fillRect(0, 0, 530, 180);
 }
 
-function doPlan(obj, context) {
-    //TEMPORARY CANVAS FOR TESTING
-    context.clearRect(0, 0, obj.width, obj.height);
+function doPlan() {
+    planCon.clearRect(0, 0, planObj.width, planObj.height);
   
-    // filled box
-    context.fillStyle = "#FF0000"; //red
-    context.fillRect(0, 0, 530, 180);
+    // slab
+    planCon.fillStyle = "#d2cbcd"; // concrete porch
+    planCon.fillRect(0, 0, planObj.width, planObj.height);
+
+    /*   ******   outer skin with interior of the wall   ******   */
+    // starting from 1 * SCL to allow the stroke to show with linewidth 1 * SCL
+    // All further calculations are based on this difference and will have those 
+    // adjustments accordingly to achieve the required design
+    planCon.rect(1 * SCL, 1 * SCL, planObj.width - (2 * SCL), 96 * SCL);  // 8 feet wide (8 x 12 = 96)
+
+    // interior of the wall
+    let choice = $("#opaqueConstructionMenu").find(":selected").val();
+
+    if (choice === CELLULOSE){
+      planCon.fillStyle = "#e8e5e4"; // given in Requirements document
+    }
+    else if (choice === FIBERGLASS){
+      planCon.fillStyle = "#fec7d4"; // given in Requirements document
+    }
+    else if (choice === SPRAYFORM){
+      planCon.fillStyle = "#fdfaaa"; // given in Requirements document
+    }
+    else{
+      planCon.fillStyle = "#d2cbcd"; // concrete
+    }
+    
+    planCon.fill();
+
+    //outer skin
+    planCon.lineWidth = 1 * SCL;
+    planCon.strokeStyle = "#3104fb"; // blue
+    planCon.stroke();
+
+    /*   ******   inner skin with interior floor   ******   */
+    planCon.rect(
+      (3 * SCL),
+      (3 * SCL),
+      planObj.width - (6 * SCL),
+      92 * SCL      // 8 feet wide (8 x 12 = 96) - 4 inches for the border (96 - 4 = 92)
+    );
+    
+    // interior floor
+    planCon.fillStyle = "#d2cbcd"; // concrete
+    planCon.fill();
+
+    //inner skin
+    planCon.lineWidth = 1 * SCL;
+    planCon.strokeStyle = "#3104fb"; // blue
+    planCon.stroke();
+
+    // door spacing
+    /*planCon.rect(
+      160 * SCL,
+      94 * SCL,
+      5 * SCL,
+      2 * SCL
+    );
+    planCon.fillStyle = "#d2cbcd"; // concrete
+    planCon.fill();
+    planCon.strokeStyle = "#d2cbcd"; // concrete
+    planCon.stroke();*/
+
+    // door outer threshold
+    planCon.strokeStyle = "#000000"; // black
+    planCon.setLineDash([4, 3]);    // [ dashes px, spaces px]
+    planCon.beginPath();
+    planCon.moveTo(160 * SCL, 97 * SCL);
+    planCon.lineTo(196 * SCL, 97 * SCL);
+    planCon.stroke();
+
+    // opened door
+    planCon.strokeStyle = "#000000"; // black
+    planCon.lineWidth = 3 * SCL;
+    planCon.setLineDash([]); // no dashes
+    planCon.beginPath();
+    planCon.moveTo(160 * SCL, 97 * SCL);
+    planCon.lineTo(160 * SCL, 132 * SCL);
+    planCon.stroke();
 }
 
 /*
@@ -92,7 +185,7 @@ function doPlan(obj, context) {
 function changeThickness(){
   $("#thicknessReadout").val(thickness);
 
-  // Code to change the thickness of the walls in the Plan View canvas.
+  doPlan();
 }
 
 /*
@@ -123,19 +216,31 @@ function changeWindowArea(){
 }
 
 //Function that changes visbility on selecting insulation.
-function onSelect() {
+function onSelectViewChapters() {
     // onSelect added in html file. Function name might need to be changed when
     // more selection functions are implemented
     let choice = $("#viewChaptersMenu").find(":selected").val();
-    if (choice === INSULATION) {
-      everythingVisble();
+    if (choice === VIEWCHAPETERS){
+      everythingHidden();
     } 
-  }
+    else if (choice === INSULATION) {
+      everythingVisble();
+    }
+}
+
+function onSelectOpaqueConstructionMenu() {
+  doPlan();
+}
 
 function everythingVisble(){
-//Making everything visible once insulation is selected
+    //Making everything visible once insulation is selected
     document.getElementById("plan").style.visibility = VISIBLE;
     document.getElementById("elevation").style.visibility = VISIBLE;
+
+    // drawing canvases
+    doPlan();
+    doElevation();
+
     // Places with degree-days
     $('#degreeDaysMenu').parent().show();
 
@@ -172,7 +277,6 @@ function everythingVisble(){
     $("#readoutsMenu").parent().show();
 
     $("#conceptsMenu").parent().show();
-
 }
 
 function everythingHidden(){
@@ -215,5 +319,4 @@ function everythingHidden(){
     $("#readoutsMenu").parent().hide();
 
     $("#conceptsMenu").parent().hide();
-
 }
