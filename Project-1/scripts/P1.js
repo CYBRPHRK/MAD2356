@@ -47,11 +47,11 @@ const SPRAYFORM = "SprayFoam";
     The purpose of this function is to:
 */
 function setup(){
-    planObj = document.getElementById("plan");
-    planCon = planObj.getContext("2d");  
-    
-    elevationObj = document.getElementById("elevation");
-    elevationCon = elevationObj.getContext("2d");
+    // plan view canvas setup
+    planSetup();
+
+    // elevaton view canvas setup
+    elevationSetup();
 
     // Opaque Thickness Slider change function
     $("#opaqueThicknessSld").on("change", function () {
@@ -85,13 +85,91 @@ function setup(){
     everythingHidden()
 }
 
-function doElevation() {
-    //TEMPORARY CANVAS FOR TESTING
-    elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
+function doElevation(windowAre) {
+  elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
+
+  $("#windowAreaReadout").val(windowArea);
+
+  elevationCon.fillStyle = "#a3bcfd"; 
+  elevationCon.fillRect(0, 0, elevationObj.width, elevationObj.height);
+  createDoor();
   
-    // filled box
-    elevationCon.fillStyle = "#6d7590"; //purple
-    elevationCon.fillRect(0, 0, 530, 180);
+  // Elevation window frame
+  elevationCon.fillStyle = "black";
+  elevationCon.fillRect(
+    80 * SCL - windowArea * SCL,
+    25 * SCL,
+    2 * windowArea * SCL + Number(6),
+    Number((3 * windowArea / 2) * SCL) + Number(4)
+  );
+  elevationCon.fillStyle = "#a3bcfd";
+  elevationCon.fillRect(
+    81 * SCL - windowArea * SCL,
+    26 * SCL,
+    2 * windowArea * SCL + Number(3),
+    Number(((3 * windowArea) / 2) * SCL) + Number(1)
+  );
+  // elevation window
+  elevationCon.fillStyle = "black";
+  elevationCon.fillRect(
+    82 * SCL - windowArea * SCL,
+    27 * SCL,
+    2 * windowArea * SCL,
+    Number(((3 * windowArea) / 2) * SCL) - 2
+  );
+  elevationCon.fillStyle = "#a3bcfd";
+  elevationCon.fillRect(
+    83 * SCL - windowArea * SCL,
+    28 * SCL,
+    2 * windowArea * SCL - 2,
+    Number(((3 * windowArea) / 2) * SCL) - 4
+  );
+
+}
+
+function elevationSetup(){
+  // function to setup the elevation canvas
+
+  elevationObj = document.getElementById("elevation");
+  elevationCon = elevationObj.getContext("2d");
+  $("#windowAreaReadout").val(0);
+  createDoor();
+}
+
+function createDoor(){
+  // function to create door
+
+  elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
+  elevationCon.fillStyle = "#a3bcfd"; // blue 
+  elevationCon.fillRect(0, 0, elevationObj.width, elevationObj.height);
+  // door Frame
+  elevationCon.fillStyle = "black";
+  elevationCon.fillRect(158 * SCL, 25 * SCL, 40 * SCL, 84 * SCL);
+  
+  elevationCon.fillStyle = "#a3bcfd";
+  elevationCon.fillRect(159 * SCL, 26 * SCL, 38 * SCL, 82 * SCL);   
+  
+  // door 
+  elevationCon.fillStyle = "black";
+  elevationCon.fillRect(160 * SCL, 27 * SCL, 36 * SCL, 80 * SCL);
+  
+  elevationCon.fillStyle = "#a3bcfd";
+  elevationCon.fillRect(161 * SCL, 28 * SCL, 34 * SCL, 78 * SCL);
+
+  // door handle
+  elevationCon.strokeStyle = "black"; 
+  elevationCon.lineWidth = 1;
+  elevationCon.beginPath();
+  elevationCon.arc(255, 90, 3, 0, 2 * Math.PI);
+  elevationCon.stroke();
+
+}
+
+function planSetup(){
+    planObj = document.getElementById("plan");
+    planCon = planObj.getContext("2d");
+    
+    $("#thicknessReadout").val(2);
 }
 
 function doPlan() {
@@ -213,6 +291,7 @@ function changeWindowArea(){
   $("#windowAreaReadout").val(windowArea);
 
   // Code to change the Window area in both the canvases.
+  doElevation(windowArea);
 }
 
 //Function that changes visbility on selecting insulation.
