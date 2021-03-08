@@ -85,7 +85,7 @@ function setup(){
     everythingHidden()
 }
 
-function doElevation(windowAre) {
+function doElevation(windowArea) {
   elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
 
   $("#windowAreaReadout").val(windowArea);
