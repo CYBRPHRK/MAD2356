@@ -26,6 +26,9 @@ var elevationObj, elevationCon;
 // global scaling constant
 const SCL = 1.35;
 
+// global Building Height constant
+const BUILDING_HEIGHT = 132;
+
 // global hidden and visible contants
 const HIDDEN = "hidden";
 const VISIBLE = "visible";
@@ -41,7 +44,7 @@ const CONTAINER = "Container";
 const UNINSULATED = "Uninsulated";
 const CELLULOSE = "Cellulose";
 const FIBERGLASS = "Fiberglass";
-const SPRAYFORM = "SprayFoam";
+const SPRAYFOAM = "SprayFoam";
 
 /*
     The purpose of this function is to:
@@ -55,7 +58,7 @@ function setup(){
 
     // Opaque Thickness Slider change function
     $("#opaqueThicknessSld").on("change", function () {
-        thickness = $(this).val();
+        thickness = $(this).val() / 2;
 
         changeThickness();
     });
@@ -85,46 +88,48 @@ function setup(){
     everythingHidden()
 }
 
-function doElevation(windowArea) {
+function doElevation() {
   elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
-
-  $("#windowAreaReadout").val(windowArea);
 
   elevationCon.fillStyle = "#a3bcfd"; 
   elevationCon.fillRect(0, 0, elevationObj.width, elevationObj.height);
   createDoor();
-  
-  // Elevation window frame
-  elevationCon.fillStyle = "black";
-  elevationCon.fillRect(
-    80 * SCL - windowArea * SCL,
-    25 * SCL,
-    2 * windowArea * SCL + Number(6),
-    Number((3 * windowArea / 2) * SCL) + Number(4)
-  );
-  elevationCon.fillStyle = "#a3bcfd";
-  elevationCon.fillRect(
-    81 * SCL - windowArea * SCL,
-    26 * SCL,
-    2 * windowArea * SCL + Number(3),
-    Number(((3 * windowArea) / 2) * SCL) + Number(1)
-  );
-  // elevation window
-  elevationCon.fillStyle = "black";
-  elevationCon.fillRect(
-    82 * SCL - windowArea * SCL,
-    27 * SCL,
-    2 * windowArea * SCL,
-    Number(((3 * windowArea) / 2) * SCL) - 2
-  );
-  elevationCon.fillStyle = "#a3bcfd";
-  elevationCon.fillRect(
-    83 * SCL - windowArea * SCL,
-    28 * SCL,
-    2 * windowArea * SCL - 2,
-    Number(((3 * windowArea) / 2) * SCL) - 4
-  );
 
+  if (windowArea > 1){
+    // Elevation window frame
+    elevationCon.fillStyle = "black";
+    elevationCon.fillRect(
+      80 * SCL - windowArea * SCL,
+      25 * SCL,
+      2 * windowArea * SCL + Number(6),
+      Number((3 * windowArea / 2) * SCL) + Number(4)
+    );
+    elevationCon.fillStyle = "#a3bcfd";
+    elevationCon.fillRect(
+      81 * SCL - windowArea * SCL,
+      26 * SCL,
+      2 * windowArea * SCL + Number(3),
+      Number(((3 * windowArea) / 2) * SCL) + Number(1)
+    );
+    // elevation window
+    elevationCon.fillStyle = "black";
+    elevationCon.fillRect(
+      82 * SCL - windowArea * SCL,
+      27 * SCL,
+      2 * windowArea * SCL,
+      Number(((3 * windowArea) / 2) * SCL) - 2
+    );
+    elevationCon.fillStyle = "#a3bcfd";
+    elevationCon.fillRect(
+      83 * SCL - windowArea * SCL,
+      28 * SCL,
+      2 * windowArea * SCL - 2,
+      Number(((3 * windowArea) / 2) * SCL) - 4
+    );
+  }
+  else{
+    createDoor();
+  }
 }
 
 function elevationSetup(){
@@ -138,8 +143,8 @@ function elevationSetup(){
 
 function createDoor(){
   // function to create door
-
   elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
+
   elevationCon.fillStyle = "#a3bcfd"; // blue 
   elevationCon.fillRect(0, 0, elevationObj.width, elevationObj.height);
   // door Frame
@@ -173,86 +178,119 @@ function planSetup(){
 }
 
 function doPlan() {
-    planCon.clearRect(0, 0, planObj.width, planObj.height);
+  //Function that makes the plan view canvas
+  planCon.clearRect(0, 0, planObj.width, planObj.height);
   
-    // slab
-    planCon.fillStyle = "#d2cbcd"; // concrete porch
-    planCon.fillRect(0, 0, planObj.width, planObj.height);
-
-    /*   ******   outer skin with interior of the wall   ******   */
-    // starting from 1 * SCL to allow the stroke to show with linewidth 1 * SCL
-    // All further calculations are based on this difference and will have those 
-    // adjustments accordingly to achieve the required design
-    planCon.rect(1 * SCL, 1 * SCL, planObj.width - (2 * SCL), 96 * SCL);  // 8 feet wide (8 x 12 = 96)
-
-    // interior of the wall
-    let choice = $("#opaqueConstructionMenu").find(":selected").val();
-
-    if (choice === CELLULOSE){
-      planCon.fillStyle = "#e8e5e4"; // given in Requirements document
-    }
-    else if (choice === FIBERGLASS){
-      planCon.fillStyle = "#fec7d4"; // given in Requirements document
-    }
-    else if (choice === SPRAYFORM){
-      planCon.fillStyle = "#fdfaaa"; // given in Requirements document
-    }
-    else{
-      planCon.fillStyle = "#d2cbcd"; // concrete
-    }
-    
-    planCon.fill();
-
-    //outer skin
-    planCon.lineWidth = 1 * SCL;
-    planCon.strokeStyle = "#3104fb"; // blue
-    planCon.stroke();
-
-    /*   ******   inner skin with interior floor   ******   */
-    planCon.rect(
-      (3 * SCL),
-      (3 * SCL),
-      planObj.width - (6 * SCL),
-      92 * SCL      // 8 feet wide (8 x 12 = 96) - 4 inches for the border (96 - 4 = 92)
-    );
-    
-    // interior floor
+  // slab
+  planCon.fillStyle = "#d2cbcd"; // concrete porch
+  planCon.fillRect(0, 0, planObj.width, planObj.height);
+  // outer skin
+  planCon.fillStyle = "#3104fb"; // blue
+  planCon.fillRect(0, 0, planObj.width, BUILDING_HEIGHT);
+  
+  // planObj interior wall changing the color based on insulation selected 
+  let choice = $("#opaqueConstructionMenu").find(":selected").val();
+  
+  if (choice === CELLULOSE){
+    planCon.fillStyle = "#e8e5e4"; // white
+     
+  }else if (choice === FIBERGLASS){
+     planCon.fillStyle = "#fec7d4"; // pink
+     
+  }else if (choice === SPRAYFOAM ){
+    planCon.fillStyle = "#fdfaaa"; // yellow
+     
+  }else{
     planCon.fillStyle = "#d2cbcd"; // concrete
-    planCon.fill();
+  }
 
-    //inner skin
-    planCon.lineWidth = 1 * SCL;
-    planCon.strokeStyle = "#3104fb"; // blue
-    planCon.stroke();
+  planCon.fillRect(1, 1, planObj.width - 2, BUILDING_HEIGHT - 2);
+  
+  // inner skin
+  planCon.fillStyle = "#3104fb";
+  planCon.fillRect(
+    thickness * SCL + Number(2),
+    thickness * SCL + Number(2),
+    planObj.width - 2 * thickness * SCL - 4,
+    BUILDING_HEIGHT - 2 * thickness * SCL - 4
+  );
+  // interior floor
+  planCon.fillStyle = "#d2cbcd"; // concrete
+  planCon.fillRect(
+    thickness * SCL + Number(3),
+    thickness * SCL + Number(3),
+    planObj.width - 2 * thickness * SCL - 6,
+    BUILDING_HEIGHT - 2 * thickness * SCL - 6
+  );
 
-    // door spacing
-    /*planCon.rect(
-      160 * SCL,
-      94 * SCL,
-      5 * SCL,
-      2 * SCL
-    );
-    planCon.fillStyle = "#d2cbcd"; // concrete
-    planCon.fill();
-    planCon.strokeStyle = "#d2cbcd"; // concrete
-    planCon.stroke();*/
 
-    // door outer threshold
-    planCon.strokeStyle = "#000000"; // black
-    planCon.setLineDash([4, 3]);    // [ dashes px, spaces px]
-    planCon.beginPath();
-    planCon.moveTo(160 * SCL, 97 * SCL);
-    planCon.lineTo(196 * SCL, 97 * SCL);
-    planCon.stroke();
+  planCon.fillStyle = "#d2cbcd"; // concrete
+  planCon.fillRect(
+    100 * SCL - windowArea * SCL,
+    planObj.height - thickness * SCL - 2 * SCL,
+    2 * windowArea * SCL,
+    thickness * SCL + Number(2 * SCL)
+  );
+  
+  //plan door block
+  planCon.fillStyle="#d2cbcd"; //concrete
+  planCon.fillRect(160*SCL,128,36*SCL,4);
+  
+  //plan door entrance dot line
+  planCon.beginPath();
+  planCon.strokeStyle="#000000";  //black
+  planCon.setLineDash([3,3]);
+  planCon.moveTo(160*SCL,132);
+  planCon.lineTo(196*SCL,132);
+  planCon.stroke();
+ 
+  planCon.fillStyle="#000000";  //black
+  planCon.fillRect(160*SCL,132,4,37*SCL);
+  
+  //plan door swing dotted line
+  planCon.beginPath();
+  planCon.strokeStyle="#000000";  //black
+  planCon.setLineDash([3,3]);
+  planCon.arc(160*SCL, 132,36*SCL,0, Math.PI / 2);
+  planCon.stroke();
+  
+  //plan inner door opening clear
+  planCon.fillStyle="#d2cbcd";  //concrete
+  planCon.fillRect(160*SCL, 70, 50, 45*SCL);
+  
+  //plan inner door door entrance
+  planCon.beginPath();
+  planCon.strokeStyle="#000000";  //black
+  planCon.moveTo(160*SCL, BUILDING_HEIGHT -1 * thickness * SCL - 4);
+  planCon.lineTo(196*SCL, BUILDING_HEIGHT -1 * thickness * SCL - 4);
+  planCon.stroke();
+  
+  // plan window
+  planCon.fillStyle = "#07ebf8"; // glass
+  planCon.fillRect(
+    75 * SCL - windowArea * SCL,
+    planObj.height - thickness * SCL - 2 * SCL -46,
+    2 * windowArea * SCL,
+    thickness * SCL + Number(2 * SCL)
+  );
 
-    // opened door
-    planCon.strokeStyle = "#000000"; // black
-    planCon.lineWidth = 3 * SCL;
-    planCon.setLineDash([]); // no dashes
-    planCon.beginPath();
-    planCon.moveTo(160 * SCL, 97 * SCL);
-    planCon.lineTo(160 * SCL, 132 * SCL);
-    planCon.stroke();
+  // plan window inner threshold
+  planCon.setLineDash([4, 3]);
+  planCon.beginPath();
+  planCon.moveTo(
+    75 * SCL - windowArea * SCL,
+    planObj.height - thickness * SCL - 2 * SCL -46
+  );
+  planCon.lineTo(
+    75 * SCL + Number(windowArea * SCL),
+    planObj.height - thickness * SCL - 2 * SCL -46
+  );
+  planCon.stroke();
+  // plan window outer threshold
+  planCon.beginPath();
+  planCon.moveTo(75 * SCL - windowArea * SCL, planObj.height -46 );
+  planCon.lineTo(75 * SCL + Number(windowArea * SCL), planObj.height -46);
+  planCon.stroke();
 }
 
 /*
@@ -263,7 +301,9 @@ function doPlan() {
 function changeThickness(){
   $("#thicknessReadout").val(thickness);
 
+  // Code to change the Window area in both the canvases.
   doPlan();
+  doElevation();
 }
 
 /*
@@ -288,10 +328,11 @@ function changeWTResistance(){
   - change both the canvases according to the values from the Window Area slider
 */
 function changeWindowArea(){
-  $("#windowAreaReadout").val(windowArea);
+  $("#windowAreaReadout").val(windowArea * 2);
 
   // Code to change the Window area in both the canvases.
-  doElevation(windowArea);
+  doPlan();
+  doElevation();
 }
 
 //Function that changes visbility on selecting insulation.
@@ -318,7 +359,6 @@ function everythingVisble(){
 
     // drawing canvases
     doPlan();
-    doElevation();
 
     // Places with degree-days
     $('#degreeDaysMenu').parent().show();
