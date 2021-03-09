@@ -1,3 +1,14 @@
+/*
+    Authors: Shivam Singla (Group Leader) - 35 lines
+             Mohammad Qureshi - 0 lines
+             Nickieda Johnson - 0 lines
+             Saransh Singh - 0 lines
+
+    The purpose of this file is to provide styling to the different
+    class and id elements. It is ordered starting with jQuery Mobile
+    classes followed by programmer defined class section.
+*/
+
 /* jQuery Mobile classes              */
 /* Background colour                  */
 .ui-page,
@@ -8,11 +19,6 @@
 /* hide default slider text box      */
 .ui-slider-input {
   display: none !important;
-}
-
-h1 {
-  margin: auto;
-  width: fit-content;
 }
 
 /* user-defined classes */

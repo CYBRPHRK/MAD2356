@@ -1,10 +1,11 @@
 /*
-    Author: Shivam Singla (A#) (Group Leader)
-            Mohammad Qureshi (A#)
-            Nickieda Johnson (A#)
-            Saransh Singh (A#)
+    Authors: Shivam Singla (Group Leader) - 160 lines
+             Mohammad Qureshi - 165 lines
+             Nickieda Johnson - 0 lines
+             Saransh Singh - 75 lines
 
-    The purpose of the file is to: ...
+    The purpose of this file is to provide the behaviours for 
+    dropdown menus, canvases, sliders and readouts used in the HTML file.
 */
 
 // global variable for Opaque Thickness
@@ -21,7 +22,6 @@ var windowArea = 0;
 var planObj, planCon;
 // Elevation view
 var elevationObj, elevationCon;
-
 
 // global scaling constant
 const SCL = 1.35;
@@ -47,7 +47,10 @@ const FIBERGLASS = "Fiberglass";
 const SPRAYFOAM = "SprayFoam";
 
 /*
-    The purpose of this function is to:
+    The purpose of this function is to initiate the objects and 
+    context variables for plan and elevation view,
+    start anonymous functions for sliders onchange,
+    hiding eveything for insulation initially.
 */
 function setup(){
     // plan view canvas setup
@@ -85,14 +88,21 @@ function setup(){
     });
 
     // To hide eveything initially
-    everythingHidden()
+    everythingHidden();
 }
 
-function doElevation() {
-  elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
+// Function that does the initial elevation canvas setup
+function elevationSetup(){
+  // function to setup the elevation canvas
 
-  elevationCon.fillStyle = "#a3bcfd"; 
-  elevationCon.fillRect(0, 0, elevationObj.width, elevationObj.height);
+  elevationObj = document.getElementById("elevation");
+  elevationCon = elevationObj.getContext("2d");
+  $("#windowAreaReadout").val(0);
+  createDoor();
+}
+
+//Function that makes the elevation view canvas
+function doElevation() {
   createDoor();
 
   if (windowArea > 1){
@@ -127,20 +137,9 @@ function doElevation() {
       Number(((3 * windowArea) / 2) * SCL) - 4
     );
   }
-  else{
-    createDoor();
-  }
 }
 
-function elevationSetup(){
-  // function to setup the elevation canvas
-
-  elevationObj = document.getElementById("elevation");
-  elevationCon = elevationObj.getContext("2d");
-  $("#windowAreaReadout").val(0);
-  createDoor();
-}
-
+//Function that clears and creates a door in the elevation canvas
 function createDoor(){
   // function to create door
   elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
@@ -170,6 +169,7 @@ function createDoor(){
 
 }
 
+// Function that does the initial elevation canvas setup
 function planSetup(){
     planObj = document.getElementById("plan");
     planCon = planObj.getContext("2d");
@@ -177,8 +177,8 @@ function planSetup(){
     $("#thicknessReadout").val(2);
 }
 
+//Function that makes the plan view canvas
 function doPlan() {
-  //Function that makes the plan view canvas
   planCon.clearRect(0, 0, planObj.width, planObj.height);
   
   // slab
@@ -222,7 +222,6 @@ function doPlan() {
     planObj.width - 2 * thickness * SCL - 6,
     BUILDING_HEIGHT - 2 * thickness * SCL - 6
   );
-
 
   planCon.fillStyle = "#d2cbcd"; // concrete
   planCon.fillRect(

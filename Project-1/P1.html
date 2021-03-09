@@ -1,13 +1,17 @@
 <!DOCTYPE html5>
 
 <!--
-    Author: Shivam Singla (A#) (Group Leader)
-            Mohammad (A#)
-            Nickieda Johnson (A#)
-            Saransh Singh (A#)
+    Authors: Shivam Singla (Group Leader) - 197 lines
+             Mohammad Qureshi - 1 line
+             Nickieda Johnson - 75 lines
+             Saransh Singh - 0 lines
 
-    The purpose of the file is to ...
-
+    The purpose of the file is to create a 6x4 ui grid to arrange
+    - images (<img>)
+    - view dropdown menus (using <select>)
+    - canvas (<canvas>)
+    - sliders and readouts (using <input>)
+    - labels (<label>)
 -->
 
 <html>
@@ -27,248 +31,244 @@
     <body onload="setup()">
         <div data-role="page">
             <div class="ui-content">
-                <!--div data-role="controlgroup" data-type="horizontal"-->
-                    <div class="ui-grid-c ui-responsive">
-                        <div class="ui-block-a">
-                            <h1>
-                                <img src="Project-Logo.jpg" alt="Project XS">
-                            </h1>
-                        </div>
-                        <div class="ui-block-b">
-                            <img src="shipCrate.jpg" alt="Ship Crate" width="260" height="194">
-                        </div>
-                        <div class="ui-block-c">
-                            <div id="getSelection">
-                                <br>
-                                <br>
-                                <br>
-                                <select id="viewChaptersMenu" onchange="onSelectViewChapters()" data-theme="c" data-mini="true">
-                                    <option value="ViewChapters" class="available">VIEW CHAPTERS</option>
-                                    <option value="VentilationDrafts" class="unavailable">Ventilation and Drafts</option>
-                                    <option value="Insulation" class="available">Insulation</option>
-                                    <option value="SizeProportion" class="unavailable">Size and Proportion</option>
-                                    <option value="ImmediateContext" class="unavailable">Immediate Context</option>
-                                    <option value="ConstructionDetails" class="unavailable">Construction Details</option>
-                                    <option value="EnergySources" class="unavailable">Energy Sources </option>
-                                    <option value="RefrigerationCycle" class="unavailable">Refrigeration Cycle</option>
-                                    <option value="Psychrometrics" class="unavailable">Psychrometrics</option>
-                                    <option value="EnvironmentalImpacts" class="unavailable">Environmental Impacts</option>
-                                    <option value="RadiationGlazing" class="unavailable">Radiation and Glazing</option>
-                                </select>
-                            </div>
+                <div class="ui-grid-c ui-responsive">
+                    <div class="ui-block-a">
+                        <img src="Project-Logo.jpg" alt="Project XS">
+                    </div>
+                    <div class="ui-block-b">
+                        <img src="shipCrate.jpg" alt="Ship Crate" width="260" height="194">
+                    </div>
+                    <div class="ui-block-c">
+                        <div id="getSelection">
+                            <br>
+                            <br>
+                            <br>
+                            <select id="viewChaptersMenu" onchange="onSelectViewChapters()" data-theme="c" data-mini="true">
+                                <option value="ViewChapters" class="available">VIEW CHAPTERS</option>
+                                <option value="VentilationDrafts" class="unavailable">Ventilation and Drafts</option>
+                                <option value="Insulation" class="available">Insulation</option>
+                                <option value="SizeProportion" class="unavailable">Size and Proportion</option>
+                                <option value="ImmediateContext" class="unavailable">Immediate Context</option>
+                                <option value="ConstructionDetails" class="unavailable">Construction Details</option>
+                                <option value="EnergySources" class="unavailable">Energy Sources </option>
+                                <option value="RefrigerationCycle" class="unavailable">Refrigeration Cycle</option>
+                                <option value="Psychrometrics" class="unavailable">Psychrometrics</option>
+                                <option value="EnvironmentalImpacts" class="unavailable">Environmental Impacts</option>
+                                <option value="RadiationGlazing" class="unavailable">Radiation and Glazing</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="ui-grid-c ui-responsive">
-                        <div class="ui-block-a">
-                            <canvas
-                            id="plan"
-                            width="321"
-                            height="178"
-                            >
-                            </canvas>
-                        </div>
-                        <div class="ui-block-b"></div>
-                        <div class="ui-block-c">
-                            <canvas
-                            id="elevation"
-                            width="321"
-                            height="154"
-                            >
-                            </canvas>
+                </div>
+                <div class="ui-grid-c ui-responsive">
+                    <div class="ui-block-a">
+                        <canvas
+                        id="plan"
+                        width="321"
+                        height="178"
+                        >
+                        </canvas>
+                    </div>
+                    <div class="ui-block-b"></div>
+                    <div class="ui-block-c">
+                        <canvas
+                        id="elevation"
+                        width="321"
+                        height="154"
+                        >
+                        </canvas>
+                    </div>
+                </div>
+                <div class="ui-grid-c ui-responsive">
+                    <div class="ui-block-a">
+                        <div id="getSelection">
+                            <select id="degreeDaysMenu" data-theme="c" data-mini="true">
+                                <option value="DegreeDays">PLACES WITH DEGREE-DAYS</option>
+                                <option value="Alert">NV Alert - 13030</option>
+                                <option value="Iqaluit">NV Iqaluit - 9980</option>
+                                <option value="ResolutionIsland">NV Resolution Island - 9000</option>
+                                <option value="Yellowknife">YW Yellowknife - 8170</option>
+                                <option value="Attawapiskat">ON Attawapiskat - 7100</option>
+                                <option value="FlinFon">MB FlinFlon - 6400 </option>
+                                <option value="Noranda">QC Noranda - 6050</option>
+                                <option value="Winnipeg">MB Winnipeg - 5670</option>
+                                <option value="Campbellton">NB Campbellton - 5500</option>
+                                <option value="Calgary">AL Calgary - 5000</option>
+                                <option value="StJohns">NL St. Johns - 4800</option>
+                                <option value="Fredericton">NB Fredericton - 4670</option>
+                                <option value="Ottawa">ON Ottawa - 4520</option>
+                                <option value="Charlottetown">PE Charlottetown - 4460</option>
+                                <option value="MontrealCentre">QC Montreal Centre - 4300</option>
+                                <option value="Halifax">NS Halifax - 4000</option>
+                                <option value="Toronto">ON Toronto CH - 3500</option>
+                                <option value="Windsor">ON Windsor - 3400</option>
+                                <option value="Nanaimo">BC Nanaimo - 3000</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="ui-grid-c ui-responsive">
-                        <div class="ui-block-a">
-                            <div id="getSelection">
-                                <select id="degreeDaysMenu" data-theme="c" data-mini="true">
-                                    <option value="DegreeDays">PLACES WITH DEGREE-DAYS</option>
-                                    <option value="Alert">NV Alert - 13030</option>
-                                    <option value="Iqaluit">NV Iqaluit - 9980</option>
-                                    <option value="ResolutionIsland">NV Resolution Island - 9000</option>
-                                    <option value="Yellowknife">YW Yellowknife - 8170</option>
-                                    <option value="Attawapiskat">ON Attawapiskat - 7100</option>
-                                    <option value="FlinFon">MB FlinFlon - 6400 </option>
-                                    <option value="Noranda">QC Noranda - 6050</option>
-                                    <option value="Winnipeg">MB Winnipeg - 5670</option>
-                                    <option value="Campbellton">NB Campbellton - 5500</option>
-                                    <option value="Calgary">AL Calgary - 5000</option>
-                                    <option value="StJohns">NL St. Johns - 4800</option>
-                                    <option value="Fredericton">NB Fredericton - 4670</option>
-                                    <option value="Ottawa">ON Ottawa - 4520</option>
-                                    <option value="Charlottetown">PE Charlottetown - 4460</option>
-                                    <option value="MontrealCentre">QC Montreal Centre - 4300</option>
-                                    <option value="Halifax">NS Halifax - 4000</option>
-                                    <option value="Toronto">ON Toronto CH - 3500</option>
-                                    <option value="Windsor">ON Windsor - 3400</option>
-                                    <option value="Nanaimo">BC Nanaimo - 3000</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="ui-block-b">
-                            <div id="getSelection">
-                                <select id="opaqueConstructionMenu" onchange="onSelectOpaqueConstructionMenu()" data-theme="c" data-mini="true">
-                                    <option value="OpaqueConstruction">OPAQUE CONSTRUCTION WITH R or R/INCH</option>
-                                    <option value="Container">Bare Container (R1)</option>
-                                    <option value="Uninsulated">Plus Interior Finish, Uninsulated (R2)</option>
-                                    <option value="Cellulose">Plus Finish and Cellulose (R3/in)</option>
-                                    <option value="Fiberglass">Plus Finish and Fiberglass (R3/in)</option>
-                                    <option value="SprayFoam">Plus Finish and Spray Foam (R6/in)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="ui-block-c">
-                            <div>
-                                <input id="opaqueThicknessSld" class="slider" type="range" min="4" max="28" value="4" data-theme="c" data-track-theme="c" data-highlight="true">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="readout">
-                                                <input id="thicknessReadout" name="thicknessReadout" value="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label id="thicknessLbl" for="thicknessReadout">(") Opaque Thickness</label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                    <div class="ui-block-b">
+                        <div id="getSelection">
+                            <select id="opaqueConstructionMenu" onchange="onSelectOpaqueConstructionMenu()" data-theme="c" data-mini="true">
+                                <option value="OpaqueConstruction">OPAQUE CONSTRUCTION WITH R or R/INCH</option>
+                                <option value="Container">Bare Container (R1)</option>
+                                <option value="Uninsulated">Plus Interior Finish, Uninsulated (R2)</option>
+                                <option value="Cellulose">Plus Finish and Cellulose (R3/in)</option>
+                                <option value="Fiberglass">Plus Finish and Fiberglass (R3/in)</option>
+                                <option value="SprayFoam">Plus Finish and Spray Foam (R6/in)</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="ui-grid-c ui-responsive">
-                        <div class="ui-block-a">
+                    <div class="ui-block-c">
+                        <div>
+                            <input id="opaqueThicknessSld" class="slider" type="range" min="4" max="28" value="4" data-theme="c" data-track-theme="c" data-highlight="true">
                             <table>
                                 <tr>
                                     <td>
                                         <div class="readout">
-                                            <input id="otResReadout" name="otResReadout" value="">
+                                            <input id="thicknessReadout" name="thicknessReadout" value="">
                                         </div>
                                     </td>
                                     <td>
-                                        <label id="otResistanceLbl" for="otResReadout">(R) Opaque Thermal Resistance</label>
+                                        <label id="thicknessLbl" for="thicknessReadout">(") Opaque Thickness</label>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="ui-block-b">
-                            <div>
-                                <input id="dtResistanceSld" class="slider" type="range" min="0" max="100" value="0" data-theme="c" data-track-theme="c" data-highlight="true">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="readout">
-                                                <input id="dtResReadout" name="dtResReadout" value="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label id="dtResistanceLbl" for="dtResReadout">(R) Door Thermal Resistence</label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="ui-block-c">
-                            <div>
-                                <input id="wtResistanceSld" class="slider" type="range" min="0" max="100" value="0" data-theme="c" data-track-theme="c" data-highlight="true">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="readout">
-                                                <input id="wtResReadout" name="wtResReadout" value="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label id="wtResistanceLbl" for="wtResReadout">(R) Window Thermal Resistence</label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                    </div>
+                </div>
+                <div class="ui-grid-c ui-responsive">
+                    <div class="ui-block-a">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="readout">
+                                        <input id="otResReadout" name="otResReadout" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <label id="otResistanceLbl" for="otResReadout">(R) Opaque Thermal Resistance</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ui-block-b">
+                        <div>
+                            <input id="dtResistanceSld" class="slider" type="range" min="0" max="100" value="0" data-theme="c" data-track-theme="c" data-highlight="true">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="readout">
+                                            <input id="dtResReadout" name="dtResReadout" value="">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label id="dtResistanceLbl" for="dtResReadout">(R) Door Thermal Resistence</label>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    <div class="ui-grid-c ui-responsive">
-                        <div class="ui-block-a">
-                            <div>
-                                <input id="windowAreaSld" class="slider" type="range" min="0" max="54" value="0" data-theme="c" data-track-theme="c" data-highlight="true">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="readout">
-                                                <input id="windowAreaReadout" name="windowAreaReadout" value="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label id="windowAreaLbl" for="windowAreaReadout">(SQ. FT) Window Area</label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="ui-block-b">
-                            <div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="readout">
-                                                <input id="eotResReadout" name="eotResReadout" value="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label id="eotResistanceLbl" for="eotResReadout">(R) Effective Overall Thermal Resistance</label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="ui-block-c">
-                            <div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="bigReadout">
-                                                <input id="annualEnergyReadout" name="annualEnergyReadout" value="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label id="annualEnergyLbl" for="annualEnergyReadout">(kWh) Annual Energy </label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                    <div class="ui-block-c">
+                        <div>
+                            <input id="wtResistanceSld" class="slider" type="range" min="0" max="100" value="0" data-theme="c" data-track-theme="c" data-highlight="true">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="readout">
+                                            <input id="wtResReadout" name="wtResReadout" value="">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label id="wtResistanceLbl" for="wtResReadout">(R) Window Thermal Resistence</label>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    <div class="ui-grid-c ui-responsive">
-                        <div class="ui-block-a">
-                            <div id="getSelection">
-                                <select id="graphsMenu" data-theme="c" data-mini="true">
-                                    <option value="Graphs">GRAPHS</option>
-                                    <option value="FirstGraph" class="unavailable">Graph 1</option>
-                                    <option value="SecondGraph" class="unavailable">Graph 2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="ui-block-b">
-                            <div id="getSelection">
-                                <select id="readoutsMenu" data-theme="c" data-mini="true">
-                                    <option value="Readouts">READOUTS</option>
-                                    <option value="NetFloorArea" class="unavailable">Net to Gross Floor Area</option>
-                                    <option value="EnergyBill" class="unavailable">Energy Bill Per Net Floor Area</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="ui-block-c">
-                            <div id="getSelection">
-                                <select id="conceptsMenu" data-theme="c" data-mini="true">
-                                    <option value="Concepts">CONCEPTS</option>
-                                    <option value="LocalConditions">Local Conditions</option>
-                                    <option value="Budget">Annual Energy Budget</option>
-                                    <option value="DraftsVentilation">Drafts and Ventilation</option>
-                                    <option value="InsulationHeatLoss">Insulation and Heat Loss</option>
-                                    <option value="MaterialsInsulation">Materials and Insulation</option>
-                                    <option value="EnvironmentalImpact">Environmental Impact</option>
-                                </select>
-                            </div>
+                </div>
+                <div class="ui-grid-c ui-responsive">
+                    <div class="ui-block-a">
+                        <div>
+                            <input id="windowAreaSld" class="slider" type="range" min="0" max="54" value="0" data-theme="c" data-track-theme="c" data-highlight="true">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="readout">
+                                            <input id="windowAreaReadout" name="windowAreaReadout" value="">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label id="windowAreaLbl" for="windowAreaReadout">(SQ. FT) Window Area</label>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                <!--/div-->
+                    <div class="ui-block-b">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="readout">
+                                            <input id="eotResReadout" name="eotResReadout" value="">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label id="eotResistanceLbl" for="eotResReadout">(R) Effective Overall Thermal Resistance</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="bigReadout">
+                                            <input id="annualEnergyReadout" name="annualEnergyReadout" value="">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label id="annualEnergyLbl" for="annualEnergyReadout">(kWh) Annual Energy </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid-c ui-responsive">
+                    <div class="ui-block-a">
+                        <div id="getSelection">
+                            <select id="graphsMenu" data-theme="c" data-mini="true">
+                                <option value="Graphs">GRAPHS</option>
+                                <option value="FirstGraph" class="unavailable">Graph 1</option>
+                                <option value="SecondGraph" class="unavailable">Graph 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div id="getSelection">
+                            <select id="readoutsMenu" data-theme="c" data-mini="true">
+                                <option value="Readouts">READOUTS</option>
+                                <option value="NetFloorArea" class="unavailable">Net to Gross Floor Area</option>
+                                <option value="EnergyBill" class="unavailable">Energy Bill Per Net Floor Area</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div id="getSelection">
+                            <select id="conceptsMenu" data-theme="c" data-mini="true">
+                                <option value="Concepts">CONCEPTS</option>
+                                <option value="LocalConditions">Local Conditions</option>
+                                <option value="Budget">Annual Energy Budget</option>
+                                <option value="DraftsVentilation">Drafts and Ventilation</option>
+                                <option value="InsulationHeatLoss">Insulation and Heat Loss</option>
+                                <option value="MaterialsInsulation">Materials and Insulation</option>
+                                <option value="EnvironmentalImpact">Environmental Impact</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
