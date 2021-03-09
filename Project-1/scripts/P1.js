@@ -90,3 +90,78 @@ function changeWindowArea(){
 
     // Code to change the Window area in both the canvases.
 }
+
+/*
+    The purpose of this function is to:
+    -show the corresponding information when selected from the dropdown menus
+*/
+
+//contant variables declared
+const VIEW_CHAPTERS = "ViewChapters"
+const VENTILATION_DRAFTS = "VentilationDrafts";
+const INSULATION = "Insulation";
+const SIZE_PROPORTION = "SizeProportion";
+const IMMEDIATE_CONTEXT = "ImmediateContext";
+const CONSTRUCTION_DETAILS = "ConstructionDetails";
+const ENERGY_SOURCES = "EnergySources";
+const REFRIGERATION_CYCLE = "RefrigerationCycle";
+const PSYCHROMETICS = "Psychrometrics";
+const ENVIRONMENTAL_IMPACTS = "EnvironmentalImpacts";
+const RADIATION_GLAZING = "RadiationGlazing";
+
+function onSelectViewChapters() {
+    let choice = $("#viewChaptersMenu").find(":selected").val();
+    if (choice === VIEW_CHAPTERS) {
+        everythingHidden();
+    }
+    else if(choice === INSULATION) {
+        everythingVisible();
+    }
+}
+
+const HIDDEN="hidden";
+const VISIBLE="visible";
+//The purpose of this function is to show everything when Insulation is selected
+function everythingVisible() {
+    document.getElementById("Plan").style.visibility= VISIBLE;
+}
+//The purpose of this function is to hide everything otherwise
+function everythingHidden() {
+    document.getElementById("Plan").style.visibility=HIDDEN;
+}
+
+/*
+The purpose of this function is to..
+*/
+function onSelectDegreeDaysMenu() {
+    //do
+}
+
+/*
+The purpose of this function is to..
+*/
+function onSelectopaqueConstructionMenu() {
+    //do
+}
+
+/*
+The purpose of this function is to..
+*/
+function onSelectGraphsMenu() {
+    //do
+}
+
+/*
+The purpose of this function is to..
+*/
+function onSelectReadoutsMenu() {
+    //do
+}
+
+/*
+The purpose of this function is to..
+*/
+function onSelectConceptsMenu() {
+    //do
+}
+
