@@ -82,7 +82,7 @@ function setup(){
 
     // Window Area Slider change function
     $("#windowAreaSld").on("change", function () {
-        windowArea = $(this).val();
+        windowArea = $(this).val() / 2;
 
         changeWindowArea();
     });
@@ -175,6 +175,8 @@ function planSetup(){
     planCon = planObj.getContext("2d");
     
     $("#thicknessReadout").val(2);
+    $("#dtResReadout").val(2);
+    $("#wtResReadout").val(1);
 }
 
 //Function that makes the plan view canvas
@@ -298,7 +300,9 @@ function doPlan() {
   - change the Plan View canvas according to the values from the Opaque Thickness slider
 */
 function changeThickness(){
-  $("#thicknessReadout").val(thickness);
+  if (thickness >= 4){
+    $("#thicknessReadout").val(thickness);
+  }
 
   // Code to change the Window area in both the canvases.
   doPlan();
@@ -327,7 +331,9 @@ function changeWTResistance(){
   - change both the canvases according to the values from the Window Area slider
 */
 function changeWindowArea(){
-  $("#windowAreaReadout").val(windowArea * 2);
+  let window = (windowArea / 12) * (((windowArea / 12) * 3));
+  let windowAreaTrunc = Math.trunc(Number(window) * 10) / 10;
+  $("#windowAreaReadout").val(windowAreaTrunc);
 
   // Code to change the Window area in both the canvases.
   doPlan();
