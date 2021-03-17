@@ -1,21 +1,24 @@
 /*
-    Authors: Shivam Singla (Group Leader) - 160 lines
-             Mohammad Qureshi - 165 lines
-             Nickieda Johnson - 0 lines
-             Saransh Singh - 75 lines
+    Authors: Shivam Singla (Group Leader)
+             Mohammad Qureshi
+             Nickieda Johnson
 
     The purpose of this file is to provide the behaviours for 
     dropdown menus, canvases, sliders and readouts used in the HTML file.
 */
 
 // global variable for Opaque Thickness
-var thickness = 0;
+var thickness = 2;
 // global variable for Door Thermal Resistance
-var dtResistance = 0;
+var dtResistance = 2;
 // global variable for Window Thermal Resistance
-var wtResistance = 0;
+var wtResistance = 1;
 // global variable for Window Area
 var windowArea = 0;
+// global variable for Opaque Construction Menu value
+var opConsValue = 0;
+// global variable for Places with Degree Days Manu value
+var degree = 0;
 
 /*    global variables for the canvas   */
 // Plan View
@@ -304,6 +307,13 @@ function changeThickness(){
     $("#thicknessReadout").val(thickness);
   }
 
+  let choice = $("#opaqueConstructionMenu").find(":selected").val();
+  if (choice !== OPAQUECONSTRUCTION){
+    changeOTResistance();
+    changeEOTResistance();
+    onSelectDegreeDaysMenu();
+  }
+
   // Code to change the Window area in both the canvases.
   doPlan();
   doElevation();
@@ -315,6 +325,12 @@ function changeThickness(){
 */
 function changeDTResistance(){
   $("#dtResReadout").val(dtResistance);
+
+  let choice = $("#opaqueConstructionMenu").find(":selected").val();
+  if (choice !== OPAQUECONSTRUCTION){
+    changeEOTResistance();
+    onSelectDegreeDaysMenu();
+  }
 }
 
 /*
@@ -323,11 +339,17 @@ function changeDTResistance(){
 */
 function changeWTResistance(){
   $("#wtResReadout").val(wtResistance);
+
+  let choice = $("#opaqueConstructionMenu").find(":selected").val();
+  if (choice !== OPAQUECONSTRUCTION){
+    changeEOTResistance();
+    onSelectDegreeDaysMenu();
+  }
 }
 
 /*
   The purpose of this function is to:
-  - display Window Area in the Window Area Readout
+  - calculate and display Window Area in the Window Area Readout
   - change both the canvases according to the values from the Window Area slider
 */
 function changeWindowArea(){
@@ -335,29 +357,128 @@ function changeWindowArea(){
   let windowAreaTrunc = Math.trunc(Number(window) * 10) / 10;
   $("#windowAreaReadout").val(windowAreaTrunc);
 
+  let choice = $("#opaqueConstructionMenu").find(":selected").val();
+  if (choice !== OPAQUECONSTRUCTION){
+    changeEOTResistance();
+    onSelectDegreeDaysMenu();
+  }
+
   // Code to change the Window area in both the canvases.
   doPlan();
   doElevation();
 }
 
-//Function that changes visbility on selecting insulation.
+/*
+  The purpose of this function is to:
+  - calculate and display the Opaque Thermal Resistance in the
+    Opaque Thermal Resistance Readout
+*/
+function changeOTResistance(){
+  let result = thickness - 2;
+  result = result * opConsValue;
+  result = result + Number(2);
+  $("#otResReadout").val(result);
+}
+
+/*
+  The purpose of this function is to:
+  - calculate and display the Effective Overall Thermal Resistance in the
+    Effective Overall Thermal Resistance Readout
+*/
+function changeEOTResistance(){
+  // getting the Readout values
+  let windowAreaReadout = $("#windowAreaReadout").val();
+  let otResReadout = $("#otResReadout").val();
+
+  // calculations for Effective Overall Thermal Resistance
+  let result = (800 - windowAreaReadout) / otResReadout;
+  result = result + (windowAreaReadout / wtResistance);
+  result = result + (20 / dtResistance);
+  result = result / 820;
+  result = 1 / result;
+  $("#eotResReadout").val(result);
+}
+
+/*
+  The purpose of this function is to:
+  - calculate and display the Annual Energy in the Annual Energy Readout
+*/
+function changeAnnualEnergy(){
+  // getting the Readout value
+  let eotResReadout = $("#eotResReadout").val();
+
+  // calculation for Annual Energy
+  let result = 820 * degree * 1.8 * 24;
+  result = result / eotResReadout;
+  result = result + (degree * 1.8 * 24 * 65);
+  result = result / 3412;
+  result = result + 3000;
+  $("#annualEnergyReadout").val(result);
+}
+
+/*
+  This function is called when a selection is made on View Chapters Menu
+*/
 function onSelectViewChapters() {
-    // onSelect added in html file. Function name might need to be changed when
-    // more selection functions are implemented
     let choice = $("#viewChaptersMenu").find(":selected").val();
     if (choice === VIEWCHAPETERS){
       everythingHidden();
     } 
     else if (choice === INSULATION) {
-      everythingVisble();
+      everythingVisible();
     }
 }
 
+/*
+  This function is called when a selection is made on Opaque Construction Menu
+*/
 function onSelectOpaqueConstructionMenu() {
+  let choice = $("#opaqueConstructionMenu").find(":selected").val();
+  
+  if ((choice === CONTAINER) || (choice === UNINSULATED)){
+    opConsValue = 0;
+    changeOTResistance();
+    changeEOTResistance();
+    onSelectDegreeDaysMenu();
+  }
+  else if ((choice === CELLULOSE) || (choice === FIBERGLASS)){
+    opConsValue = 3;
+    changeOTResistance();
+    changeEOTResistance();
+    onSelectDegreeDaysMenu();
+  }
+  else if (choice === SPRAYFOAM ){
+    opConsValue = 6;
+    changeOTResistance();
+    changeEOTResistance();
+    onSelectDegreeDaysMenu();
+  }
+  else{
+    opConsValue = 0;
+  }
+
   doPlan();
 }
 
-function everythingVisble(){
+/*
+  This function is called when a selection is made on Degree Days Menu
+*/
+function onSelectDegreeDaysMenu(){
+  let choice = $("#degreeDaysMenu").find(":selected").val();
+  
+  if (choice === "DegreeDays"){
+    degree = 0;
+  }
+  else{
+    degree = Number(choice);
+    let opChoice = $("#opaqueConstructionMenu").find(":selected").val();
+    if (opChoice !== OPAQUECONSTRUCTION){
+      changeAnnualEnergy();
+    }
+  }
+}
+
+function everythingVisible(){
     //Making everything visible once insulation is selected
     document.getElementById("plan").style.visibility = VISIBLE;
     document.getElementById("elevation").style.visibility = VISIBLE;
