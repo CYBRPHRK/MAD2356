@@ -257,13 +257,13 @@ function doPlan() {
   planCon.stroke();
  
   planCon.fillStyle="#000000";  //black
-  planCon.fillRect(160*SCL,132,4,37*SCL);
+  planCon.fillRect(160*SCL,127,4,37*SCL);
   
   //plan door swing dotted line
   planCon.beginPath();
   planCon.strokeStyle="#000000";  //black
   planCon.setLineDash([3,3]);
-  planCon.arc(160*SCL, 132,36*SCL,0, Math.PI / 2);
+  planCon.arc(160*SCL, 128,36*SCL,0, Math.PI / 2);
   planCon.stroke();
   
   //plan inner door opening clear
@@ -273,8 +273,8 @@ function doPlan() {
   //plan inner door door entrance
   planCon.beginPath();
   planCon.strokeStyle="#000000";  //black
-  planCon.moveTo(160*SCL, BUILDING_HEIGHT -1 * thickness * SCL - 4);
-  planCon.lineTo(196*SCL, BUILDING_HEIGHT -1 * thickness * SCL - 4);
+  planCon.moveTo(160*SCL, BUILDING_HEIGHT -1 * thickness * SCL - 2.5);
+  planCon.lineTo(196*SCL, BUILDING_HEIGHT -1 * thickness * SCL - 2.5);
   planCon.stroke();
   
   // plan window
