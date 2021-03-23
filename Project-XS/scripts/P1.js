@@ -49,6 +49,14 @@ const CELLULOSE = "Cellulose";
 const FIBERGLASS = "Fiberglass";
 const SPRAYFOAM = "SprayFoam";
 
+//Concepts Menu constants
+const LOCALCONDITIONS = "LocalConditions";
+const BUDGET = "Budget";
+const DRAFTSVENTILATION = "DraftsVentilation";
+const INSULATIONHEATLOSS = "InsulationHeatLoss";
+const MATERIALSINSULATION = "MaterialsInsulation";
+const ENVIRONMENTALIMPACT = "EnvironmentalImpact";
+
 /*
     The purpose of this function is to initiate the objects and 
     context variables for plan and elevation view,
@@ -477,9 +485,53 @@ function onSelectDegreeDaysMenu(){
     }
   }
 }
+/*
+  This function is called when a selection is made on Concepts Menu
+*/
+function onSelectConceptsMenu() {
+  let choice = $("#conceptsMenu").find(":selected").val();
+  hideConcepts();
 
+  if (choice === LOCALCONDITIONS){
+    $("#localConditionsOpt").show();
+  }
+  else if (choice === BUDGET) {
+    $("#annualEnergyBudgetOpt").show();
+  }
+
+  else if (choice === DRAFTSVENTILATION) {
+    $("#draftsVentilationOpt").show();
+  }
+
+  else if (choice === INSULATIONHEATLOSS) {
+    $("#insulationHeatLossOpt").show();
+  }
+  else if (choice === MATERIALSINSULATION) {
+    $("#materialsInsulationOpt").show();
+  }
+  else if (choice === ENVIRONMENTALIMPACT) {
+    $("#environmentalImpactOpt").show();
+  }
+}
+
+/*
+  The purpose of this function is to hide the information 
+  regarding the Concepts Menu.
+*/
+function hideConcepts(){
+  $("#localConditionsOpt").hide();
+  $("#annualEnergyBudgetOpt").hide();
+  $("#draftsVentilationOpt").hide();
+  $("#insulationHeatLossOpt").hide();
+  $("#materialsInsulationOpt").hide();
+  $("#environmentalImpactOpt").hide();
+}
+
+/*
+  The purpose of this function is to make everything
+  visible once insulation is selected
+*/
 function everythingVisible(){
-    //Making everything visible once insulation is selected
     document.getElementById("plan").style.visibility = VISIBLE;
     document.getElementById("elevation").style.visibility = VISIBLE;
 
@@ -524,9 +576,10 @@ function everythingVisible(){
     $("#conceptsMenu").parent().show();
 }
 
+/*
+  The purpose of this function is to make everything hidden onload
+*/
 function everythingHidden(){
-// Making everything hidden onload
-    
     document.getElementById("plan").style.visibility = HIDDEN;
     document.getElementById("elevation").style.visibility = HIDDEN;
     
@@ -564,4 +617,7 @@ function everythingHidden(){
     $("#readoutsMenu").parent().hide();
 
     $("#conceptsMenu").parent().hide();
+
+    // Hiding information for the Concepts Menu
+    hideConcepts();
 }
