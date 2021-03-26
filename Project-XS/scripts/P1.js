@@ -201,7 +201,8 @@ function doPlan() {
   planCon.fillStyle = "#3104fb"; // blue
   planCon.fillRect(0, 0, planObj.width, BUILDING_HEIGHT);
   
-  // planObj interior wall changing the color based on insulation selected 
+  // planObj interior wall changing the color based on insulation selected
+  // insulation selection is stored in the local variable choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
   
   if (choice === CELLULOSE){
@@ -315,6 +316,7 @@ function changeThickness(){
     $("#thicknessReadout").val(thickness);
   }
 
+  // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
   if (choice !== OPAQUECONSTRUCTION){
     changeOTResistance();
@@ -334,6 +336,7 @@ function changeThickness(){
 function changeDTResistance(){
   $("#dtResReadout").val(dtResistance);
 
+  // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
   if (choice !== OPAQUECONSTRUCTION){
     changeEOTResistance();
@@ -348,6 +351,7 @@ function changeDTResistance(){
 function changeWTResistance(){
   $("#wtResReadout").val(wtResistance);
 
+  // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
   if (choice !== OPAQUECONSTRUCTION){
     changeEOTResistance();
@@ -361,10 +365,13 @@ function changeWTResistance(){
   - change both the canvases according to the values from the Window Area slider
 */
 function changeWindowArea(){
+  // window area converted in square feet is stored in local variable window
   let window = (windowArea / 12) * (((windowArea / 12) * 3));
+  // window area is truncated to one decimal place and stored in local variable windowAreaTrunc
   let windowAreaTrunc = Math.trunc(Number(window) * 10) / 10;
   $("#windowAreaReadout").val(windowAreaTrunc);
 
+  // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
   if (choice !== OPAQUECONSTRUCTION){
     changeEOTResistance();
@@ -382,6 +389,7 @@ function changeWindowArea(){
     Opaque Thermal Resistance Readout
 */
 function changeOTResistance(){
+  // calculations are computed and stored in local variable result
   let result = thickness - 2;
   result = result * opConsValue;
   result = result + Number(2);
@@ -395,10 +403,12 @@ function changeOTResistance(){
 */
 function changeEOTResistance(){
   // getting the Readout values
+  // Window Area Readout value is stored in local variable windowAreaReadout
   let windowAreaReadout = $("#windowAreaReadout").val();
+  // Opaque Thermal Resistance Readout value is stored in local variable otResReadout
   let otResReadout = $("#otResReadout").val();
 
-  // calculations for Effective Overall Thermal Resistance
+  // calculations for Effective Overall Thermal Resistance are stored in local variable result
   let result = (800 - windowAreaReadout) / otResReadout;
   result = result + (windowAreaReadout / wtResistance);
   result = result + (20 / dtResistance);
@@ -413,9 +423,10 @@ function changeEOTResistance(){
 */
 function changeAnnualEnergy(){
   // getting the Readout value
+  // Effective Overall Thermal Resistance Readout value is stored in local variable eotResReadout
   let eotResReadout = $("#eotResReadout").val();
 
-  // calculation for Annual Energy
+  // calculations for Annual Energy are stored in local variable result
   let result = 820 * degree * 1.8 * 24;
   result = result / eotResReadout;
   result = result + (degree * 1.8 * 24 * 65);
@@ -428,6 +439,7 @@ function changeAnnualEnergy(){
   This function is called when a selection is made on View Chapters Menu
 */
 function onSelectViewChapters() {
+  // The selection in View Chapters Menu is stored in choice
     let choice = $("#viewChaptersMenu").find(":selected").val();
     if (choice === VIEWCHAPETERS){
       everythingHidden();
@@ -441,6 +453,7 @@ function onSelectViewChapters() {
   This function is called when a selection is made on Opaque Construction Menu
 */
 function onSelectOpaqueConstructionMenu() {
+  // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
   
   if ((choice === CONTAINER) || (choice === UNINSULATED)){
@@ -472,6 +485,7 @@ function onSelectOpaqueConstructionMenu() {
   This function is called when a selection is made on Degree Days Menu
 */
 function onSelectDegreeDaysMenu(){
+  // The selection in Places with Degree Days Menu is stored in choice
   let choice = $("#degreeDaysMenu").find(":selected").val();
   
   if (choice === "DegreeDays"){
@@ -479,6 +493,7 @@ function onSelectDegreeDaysMenu(){
   }
   else{
     degree = Number(choice);
+    // The selection in Opaque Construction Menu is stored in opChoice
     let opChoice = $("#opaqueConstructionMenu").find(":selected").val();
     if (opChoice !== OPAQUECONSTRUCTION){
       changeAnnualEnergy();
@@ -489,6 +504,7 @@ function onSelectDegreeDaysMenu(){
   This function is called when a selection is made on Concepts Menu
 */
 function onSelectConceptsMenu() {
+  // The selection in Concepts Menu is stored in choice
   let choice = $("#conceptsMenu").find(":selected").val();
   hideConcepts();
 
