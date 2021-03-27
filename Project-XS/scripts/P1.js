@@ -383,8 +383,12 @@ function changeWindowArea() {
   }
 
   // Code to change the Window area in both the canvases.
-  doPlan();
-  doElevation();
+  if (windowAreaTrunc >= 1.5) {
+    doPlan();
+    doElevation();
+  } else {
+    createDoor();
+  }
 }
 
 /*
@@ -394,10 +398,13 @@ function changeWindowArea() {
 */
 function changeOTResistance() {
   // calculations are computed and stored in local variable result
-  let result = thickness - 2;
-  result = result * opConsValue;
-  result = result + Number(2);
-  $("#otResReadout").val(result);
+  let result = 0;
+  if (thickness >= 4) {
+    result = thickness - 2;
+    result = result * opConsValue;
+    result = result + Number(2);
+    $("#otResReadout").val(result);
+  }
 }
 
 /*
@@ -413,12 +420,15 @@ function changeEOTResistance() {
   let otResReadout = $("#otResReadout").val();
 
   // calculations for Effective Overall Thermal Resistance are stored in local variable result
-  let result = (800 - windowAreaReadout) / otResReadout;
-  result = result + windowAreaReadout / wtResistance;
-  result = result + 20 / dtResistance;
-  result = result / 820;
-  result = 1 / result;
-  $("#eotResReadout").val(result);
+  let result = 0;
+  if (thickness >= 4) {
+    result = (800 - windowAreaReadout) / otResReadout;
+    result = result + windowAreaReadout / wtResistance;
+    result = result + 20 / dtResistance;
+    result = result / 820;
+    result = 1 / result;
+    $("#eotResReadout").val(Math.round(result));
+  }
 }
 
 /*
@@ -436,7 +446,7 @@ function changeAnnualEnergy() {
   result = result + degree * 1.8 * 24 * 65;
   result = result / 3412;
   result = result + 3000;
-  $("#annualEnergyReadout").val(result);
+  $("#annualEnergyReadout").val(Math.round(result));
 }
 
 /*
@@ -445,10 +455,17 @@ function changeAnnualEnergy() {
 function onSelectViewChapters() {
   // The selection in View Chapters Menu is stored in choice
   let choice = $("#viewChaptersMenu").find(":selected").val();
+  // The text for the selection in View Chapters Menu is stored in choiceText
+  let choiceText = $("#viewChaptersMenu").find(":selected").text();
+
   if (choice === VIEWCHAPETERS) {
     everythingHidden();
+    loadP3();
   } else if (choice === INSULATION) {
     everythingVisible();
+  } else {
+    alert(choiceText + " is under construction.");
+    loadP3();
   }
 }
 
@@ -635,4 +652,8 @@ function getConceptsInfo() {
   }).fail(function (error) {
     alert(error.responseText);
   });
+}
+
+function loadP3() {
+  window.location.replace("./P1.html");
 }

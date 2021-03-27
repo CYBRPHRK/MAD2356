@@ -1,3 +1,13 @@
+/*
+    Authors: Shivam Singla (Group Leader)
+             Mohammad Qureshi
+             Nickieda Johnson
+
+    The purpose of this file is to create an express server,
+    listen to the port for any method calls to the server and
+    return the conceptsInfo JSON object when get method is called.
+*/
+
 // Import the express framework into the program
 var express = require("express");
 
