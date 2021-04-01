@@ -110,7 +110,7 @@ var conceptsInfo = {
 // It is an HTTP GET request (coming from the client).
 // -"/P3ServerID" is the id (identification) used
 // - function (request, response) { ... } is a callback function that is
-//   executed when the client does an http GET operation with the route (/myroute)
+//   executed when the client does an http GET operation with the route (/P3ServerID)
 //   The server.get() function is always waiting for such an event.
 server.get("/P3ServerID", function (request, response) {
   // set the status to OK and send the JSON object

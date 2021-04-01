@@ -511,7 +511,7 @@ function onSelectDegreeDaysMenu() {
     degree = Number(choice);
     // The selection in Opaque Construction Menu is stored in opChoice
     let opChoice = $("#opaqueConstructionMenu").find(":selected").val();
-    if (opChoice !== OPAQUECONSTRUCTION) {
+    if (opChoice !== OPAQUECONSTRUCTION && thickness >= 4) {
       changeAnnualEnergy();
     }
   }
@@ -654,6 +654,10 @@ function getConceptsInfo() {
   });
 }
 
+/*
+  The purpose of this function is to reload P1.html page
+  to reinitialize the application.
+*/
 function loadP3() {
   window.location.replace("./P1.html");
 }
