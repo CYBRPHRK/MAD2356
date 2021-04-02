@@ -12,6 +12,8 @@
       createDoor()
       planSetup()
       doPlan()
+      createPlanView()
+      createPlanWindow()
       changeThickness()
       changeDTResistance()
       changeWTResistance()
@@ -219,8 +221,19 @@ function planSetup() {
   $("#wtResReadout").val(1);
 }
 
-//Function that makes the plan view canvas
+/*
+  The purpose of this function is to call the functions to create
+  a Plan view with the Window.
+*/
 function doPlan() {
+  createPlanView();
+  createPlanWindow();
+}
+
+/*
+  The purpose of this function is to make the plan view canvas.
+*/
+function createPlanView() {
   planCon.clearRect(0, 0, planObj.width, planObj.height);
 
   // slab
@@ -303,7 +316,12 @@ function doPlan() {
   planCon.moveTo(160 * SCL, BUILDING_HEIGHT - 1 * thickness * SCL - 2.5);
   planCon.lineTo(196 * SCL, BUILDING_HEIGHT - 1 * thickness * SCL - 2.5);
   planCon.stroke();
+}
 
+/*
+  The purpose of this function is to create the Window on the Plan View canvas.
+*/
+function createPlanWindow() {
   // plan window
   planCon.fillStyle = "#07ebf8"; // glass
   planCon.fillRect(
@@ -410,6 +428,7 @@ function changeWindowArea() {
     doElevation();
   } else {
     createDoor();
+    createPlanView();
   }
 }
 
