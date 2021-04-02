@@ -26,7 +26,7 @@ server.use(express.urlencoded({ extended: true }));
 
 // Set up allowance characteristics for cross-origin resource sharing (CORS)
 // The default is the original domain is the sole source, but CORS allows
-// mutilple domains to be a source in a secure manner.
+// multiple domains to be a source in a secure manner.
 var allowCrossDomain = function (req, res, next) {
   // allows all domains to be a source
   res.header("Access-Control-Allow-Origin", "*");

@@ -5,6 +5,28 @@
 
     The purpose of this file is to provide the behaviours for 
     dropdown menus, canvases, sliders and readouts used in the HTML file.
+    List of functions associated with this file:
+      setup()
+      elevationSetup()
+      doElevation()
+      createDoor()
+      planSetup()
+      doPlan()
+      changeThickness()
+      changeDTResistance()
+      changeWTResistance()
+      changeWindowArea()
+      changeOTResistance()
+      changeEOTResistance()
+      changeAnnualEnergy()
+      onSelectViewChapters()
+      onSelectOpaqueConstructionMenu()
+      onSelectDegreeDaysMenu()
+      onSelectConceptsMenu()
+      everythingVisible()
+      everythingHidden()
+      getConceptsInfo()
+      loadP3()
 */
 
 // global variable for Opaque Thickness

@@ -38,3 +38,9 @@
 .unavailable {
   color: #d2cbcd;
 }
+
+/* user-defined ids */
+#shipCrate {
+  margin: auto;
+  padding-left: 30px;
+}
