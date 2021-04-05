@@ -53,7 +53,7 @@ var conceptsInfo = {
     "also add to heating demand but are discussed elsewhere." +
     "<br><br>Warmer climates imply a cooling load: also a subject for other chapters." +
     "<br><br>Please note that to reflect the Canadian experience, this App mixes units: " +
-    "Celsius for temperature , for example, but inches and feet for dimensions.",
+    "Celsius for temperature, for example, but inches and feet for dimensions.",
   budget:
     "<br><br>Annual Energy Budget" +
     "<br><br>Envelope heat loss is only part of an energy budget. " +
@@ -67,7 +67,7 @@ var conceptsInfo = {
     "or insulation losses but not those due to air movement.",
   draftsVentilation:
     "<br><br>Drafts and Ventilation" +
-    "<br><br>Realistically, a larger window would admit more drafts,especially at the lower end of the " +
+    "<br><br>Realistically, a larger window would admit more drafts, especially at the lower end of the " +
     "quality scale, but that effect is ignored in the insulation chapter." +
     "<br><br>The Drafts and Ventilation chapter explains how energy losses due to infiltration " +
     "are controlled by membranes, sealants, joint design, and meticulous quality control. " +
@@ -93,7 +93,7 @@ var conceptsInfo = {
     "Thermal liability is a product of surface area and conductance." +
     "<br><br>The total thermal liability of an envelope is a sum of the liability of its portions. " +
     "Average conductance divides the total liability by the total area. " +
-    "The effctive R-value of an envelope is the inverse of average conductance." +
+    "The effective R-value of an envelope is the inverse of average conductance." +
     "<br><br>Note that high R- value portions of an envelope have a smaller effect on " +
     "the effective R-value than might be supposed. Conversely, low R-value portions of an envelope " +
     "such as windows have a larger effect on overall heat loss than their small area may suggest.",

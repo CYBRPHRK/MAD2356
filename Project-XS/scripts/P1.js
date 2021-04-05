@@ -219,6 +219,7 @@ function planSetup() {
   $("#thicknessReadout").val(2);
   $("#dtResReadout").val(2);
   $("#wtResReadout").val(1);
+  doPlan();
 }
 
 /*
@@ -582,93 +583,115 @@ function onSelectConceptsMenu() {
 
 /*
   The purpose of this function is to make everything
-  visible once insulation is selected
+  visible once Insulation is selected.
 */
 function everythingVisible() {
+  // Plan View and Elevation View Canvas
   document.getElementById("plan").style.visibility = VISIBLE;
   document.getElementById("elevation").style.visibility = VISIBLE;
 
-  // drawing canvases
-  doPlan();
-
-  // Places with degree-days
+  // Places with degree-days Menu
   $("#degreeDaysMenu").parent().show();
 
-  // Opaque Construction With R
+  // Opaque Construction With R Menu
   $("#opaqueConstructionMenu").parent().show();
 
+  // Opaque Thickness Slider, Readout and Label
   $("#opaqueThicknessSld").parent().show();
   $("#thicknessReadout").parent().show();
   $("#thicknessLbl").parent().show();
 
+  // Opaque Thermal Resistence Readout and Label
   $("#otResReadout").parent().show();
   $("#otResistanceLbl").parent().show();
 
+  // Door Thermal Resistence Slider, Readout and Label
   $("#dtResistanceSld").parent().show();
   $("#dtResReadout").parent().show();
   $("#dtResistanceLbl").parent().show();
 
+  // Window Thermal Resistence Slider, Readout and Label
   $("#wtResistanceSld").parent().show();
   $("#wtResReadout").parent().show();
   $("#wtResistanceLbl").parent().show();
 
+  // Window Area Slider, Readout and Label
   $("#windowAreaSld").parent().show();
   $("#windowAreaReadout").parent().show();
   $("#windowAreaLbl").parent().show();
 
+  // Effective Overall Thermal Resistence Readout and Label
   $("#eotResReadout").parent().show();
   $("#eotResistanceLbl").parent().show();
 
+  // Annual Energy Readout and Label
   $("#annualEnergyReadout").parent().show();
   $("#annualEnergyLbl").parent().show();
 
+  // Graphs Menu
   $("#graphsMenu").parent().show();
 
+  // Readouts Menu
   $("#readoutsMenu").parent().show();
 
+  // Concepts Menu
   $("#conceptsMenu").parent().show();
 }
 
 /*
-  The purpose of this function is to make everything hidden onload
+  The purpose of this function is to make everything 
+  hidden onload and when View Chapters is selected.
 */
 function everythingHidden() {
+  // Plan View and Elevation View Canvas
   document.getElementById("plan").style.visibility = HIDDEN;
   document.getElementById("elevation").style.visibility = HIDDEN;
 
+  // Places with degree-days Menu
   $("#degreeDaysMenu").parent().hide();
 
+  // Opaque Construction With R Menu
   $("#opaqueConstructionMenu").parent().hide();
 
+  // Opaque Thickness Slider, Readout and Label
   $("#opaqueThicknessSld").parent().hide();
   $("#thicknessReadout").parent().hide();
   $("#thicknessLbl").parent().hide();
 
+  // Opaque Thermal Resistence Readout and Label
   $("#otResReadout").parent().hide();
   $("#otResistanceLbl").parent().hide();
 
+  // Door Thermal Resistence Slider, Readout and Label
   $("#dtResistanceSld").parent().hide();
   $("#dtResReadout").parent().hide();
   $("#dtResistanceLbl").parent().hide();
 
+  // Window Thermal Resistence Slider, Readout and Label
   $("#wtResistanceSld").parent().hide();
   $("#wtResReadout").parent().hide();
   $("#wtResistanceLbl").parent().hide();
 
+  // Window Area Slider, Readout and Label
   $("#windowAreaSld").parent().hide();
   $("#windowAreaReadout").parent().hide();
   $("#windowAreaLbl").parent().hide();
 
+  // Effective Overall Thermal Resistence Readout and Label
   $("#eotResReadout").parent().hide();
   $("#eotResistanceLbl").parent().hide();
 
+  // Annual Energy Readout and Label
   $("#annualEnergyReadout").parent().hide();
   $("#annualEnergyLbl").parent().hide();
 
+  // Graphs Menu
   $("#graphsMenu").parent().hide();
 
+  // Readouts Menu
   $("#readoutsMenu").parent().hide();
 
+  // Concepts Menu
   $("#conceptsMenu").parent().hide();
 
   // Hiding information for the Concepts Menu
