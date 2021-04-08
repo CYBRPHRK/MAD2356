@@ -67,24 +67,24 @@ const SERVER_URL = "http://ugdev.cs.smu.ca:3300";
 
 /*    dropdown menu constants     */
 //View Chapters Menu
-const VIEWCHAPETERS = "ViewChapters";
+const VIEW_CHAPTERS = "ViewChapters";
 const INSULATION = "Insulation";
 
 //Opaque Construction Menu
-const OPAQUECONSTRUCTION = "OpaqueConstruction";
+const OPAQUE_CONSTRUCTION = "OpaqueConstruction";
 const CONTAINER = "Container";
 const UNINSULATED = "Uninsulated";
 const CELLULOSE = "Cellulose";
 const FIBERGLASS = "Fiberglass";
-const SPRAYFOAM = "SprayFoam";
+const SPRAY_FOAM = "SprayFoam";
 
 //Concepts Menu constants
-const LOCALCONDITIONS = "LocalConditions";
+const LOCAL_CONDITIONS = "LocalConditions";
 const BUDGET = "Budget";
-const DRAFTSVENTILATION = "DraftsVentilation";
-const INSULATIONHEATLOSS = "InsulationHeatLoss";
-const MATERIALSINSULATION = "MaterialsInsulation";
-const ENVIRONMENTALIMPACT = "EnvironmentalImpact";
+const DRAFTS_VENTILATION = "DraftsVentilation";
+const INSULATION_HEAT_LOSS = "InsulationHeatLoss";
+const MATERIALS_INSULATION = "MaterialsInsulation";
+const ENVIRONMENTAL_IMPACT = "EnvironmentalImpact";
 
 /*
     The purpose of this function is to initiate the objects and 
@@ -252,7 +252,7 @@ function createPlanView() {
     planCon.fillStyle = "#e8e5e4"; // white
   } else if (choice === FIBERGLASS) {
     planCon.fillStyle = "#fec7d4"; // pink
-  } else if (choice === SPRAYFOAM) {
+  } else if (choice === SPRAY_FOAM) {
     planCon.fillStyle = "#fdfaaa"; // yellow
   } else {
     planCon.fillStyle = "#d2cbcd"; // concrete
@@ -363,7 +363,7 @@ function changeThickness() {
 
   // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
-  if (choice !== OPAQUECONSTRUCTION) {
+  if (choice !== OPAQUE_CONSTRUCTION) {
     changeOTResistance();
     changeEOTResistance();
     onSelectDegreeDaysMenu();
@@ -383,7 +383,7 @@ function changeDTResistance() {
 
   // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
-  if (choice !== OPAQUECONSTRUCTION) {
+  if (choice !== OPAQUE_CONSTRUCTION) {
     changeEOTResistance();
     onSelectDegreeDaysMenu();
   }
@@ -398,7 +398,7 @@ function changeWTResistance() {
 
   // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
-  if (choice !== OPAQUECONSTRUCTION) {
+  if (choice !== OPAQUE_CONSTRUCTION) {
     changeEOTResistance();
     onSelectDegreeDaysMenu();
   }
@@ -418,7 +418,7 @@ function changeWindowArea() {
 
   // The selection in Opaque Construction Menu is stored in choice
   let choice = $("#opaqueConstructionMenu").find(":selected").val();
-  if (choice !== OPAQUECONSTRUCTION) {
+  if (choice !== OPAQUE_CONSTRUCTION) {
     changeEOTResistance();
     onSelectDegreeDaysMenu();
   }
@@ -500,7 +500,7 @@ function onSelectViewChapters() {
   // The text for the selection in View Chapters Menu is stored in choiceText
   let choiceText = $("#viewChaptersMenu").find(":selected").text();
 
-  if (choice === VIEWCHAPETERS) {
+  if (choice === VIEW_CHAPTERS) {
     everythingHidden();
     loadP3();
   } else if (choice === INSULATION) {
@@ -528,7 +528,7 @@ function onSelectOpaqueConstructionMenu() {
     changeOTResistance();
     changeEOTResistance();
     onSelectDegreeDaysMenu();
-  } else if (choice === SPRAYFOAM) {
+  } else if (choice === SPRAY_FOAM) {
     opConsValue = 6;
     changeOTResistance();
     changeEOTResistance();
@@ -553,7 +553,7 @@ function onSelectDegreeDaysMenu() {
     degree = Number(choice);
     // The selection in Opaque Construction Menu is stored in opChoice
     let opChoice = $("#opaqueConstructionMenu").find(":selected").val();
-    if (opChoice !== OPAQUECONSTRUCTION && thickness >= 4) {
+    if (opChoice !== OPAQUE_CONSTRUCTION && thickness >= 4) {
       changeAnnualEnergy();
     }
   }
@@ -566,17 +566,17 @@ function onSelectConceptsMenu() {
   let choice = $("#conceptsMenu").find(":selected").val();
 
   $("#conceptsInfo").show();
-  if (choice === LOCALCONDITIONS) {
+  if (choice === LOCAL_CONDITIONS) {
     $("#conceptsInfo").html(conceptsInfo.localConditions);
   } else if (choice === BUDGET) {
     $("#conceptsInfo").html(conceptsInfo.budget);
-  } else if (choice === DRAFTSVENTILATION) {
+  } else if (choice === DRAFTS_VENTILATION) {
     $("#conceptsInfo").html(conceptsInfo.draftsVentilation);
-  } else if (choice === INSULATIONHEATLOSS) {
+  } else if (choice === INSULATION_HEAT_LOSS) {
     $("#conceptsInfo").html(conceptsInfo.insulationHeatLoss);
-  } else if (choice === MATERIALSINSULATION) {
+  } else if (choice === MATERIALS_INSULATION) {
     $("#conceptsInfo").html(conceptsInfo.materialsInsulation);
-  } else if (choice === ENVIRONMENTALIMPACT) {
+  } else if (choice === ENVIRONMENTAL_IMPACT) {
     $("#conceptsInfo").html(conceptsInfo.environmentalImpact);
   }
 }
