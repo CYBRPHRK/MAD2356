@@ -39,6 +39,7 @@
                         <img id="shipCrate" src="shipCrate.jpg" alt="Ship Crate" width="260" height="194">
                     </div>
                     <div class="ui-block-c">
+                        <!-- Select tag for View Chapters Menu -->
                         <div id="getSelection">
                             <br>
                             <br>
@@ -59,6 +60,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Plan View and Elevation View Canvases -->
                 <div class="ui-grid-c ui-responsive">
                     <div class="ui-block-a">
                         <canvas
@@ -80,6 +82,7 @@
                 </div>
                 <div class="ui-grid-c ui-responsive">
                     <div class="ui-block-a">
+                        <!-- Select tag for Places with Degree Days Menu -->
                         <div id="getSelection">
                             <select id="degreeDaysMenu" onchange="onSelectDegreeDaysMenu()" data-theme="c" data-mini="true">
                                 <option value="DegreeDays">PLACES WITH DEGREE-DAYS</option>
@@ -108,6 +111,7 @@
                         </div>
                     </div>
                     <div class="ui-block-b">
+                        <!-- Select tag for Opaque Construction Menu -->
                         <div id="getSelection">
                             <select id="opaqueConstructionMenu" onchange="onSelectOpaqueConstructionMenu()" data-theme="c" data-mini="true">
                                 <option value="OpaqueConstruction">OPAQUE CONSTRUCTION WITH R or R/INCH</option>
@@ -120,6 +124,7 @@
                         </div>
                     </div>
                     <div class="ui-block-c">
+                        <!-- Opaque Thickness Slider, Readout and Label-->
                         <div>
                             <input id="opaqueThicknessSld" class="slider" type="range" min="4" max="28" value="4" data-theme="c" data-track-theme="c" data-highlight="true">
                             <table>
@@ -139,6 +144,7 @@
                 </div>
                 <div class="ui-grid-c ui-responsive">
                     <div class="ui-block-a">
+                        <!-- Opaque Thermal Resistance Readout and Label-->
                         <table>
                             <tr>
                                 <td>
@@ -153,6 +159,7 @@
                         </table>
                     </div>
                     <div class="ui-block-b">
+                        <!-- Door Thermal Resistance Slider, Readout and Label-->
                         <div>
                             <input id="dtResistanceSld" class="slider" type="range" min="2" max="12" value="2" data-theme="c" data-track-theme="c" data-highlight="true">
                             <table>
@@ -170,6 +177,7 @@
                         </div>
                     </div>
                     <div class="ui-block-c">
+                        <!-- Window Thermal Resistance Slider, Readout and Label-->
                         <div>
                             <input id="wtResistanceSld" class="slider" type="range" min="1" max="10" value="1" data-theme="c" data-track-theme="c" data-highlight="true">
                             <table>
@@ -189,6 +197,7 @@
                 </div>
                 <div class="ui-grid-c ui-responsive">
                     <div class="ui-block-a">
+                        <!-- Window Area Slider, Readout and Label-->
                         <div>
                             <input id="windowAreaSld" class="slider" type="range" min="0" max="108" value="0" data-theme="c" data-track-theme="c" data-highlight="true">
                             <table>
@@ -206,6 +215,7 @@
                         </div>
                     </div>
                     <div class="ui-block-b">
+                        <!-- Effective Overall Thermal Resistance Readout and Label-->
                         <div>
                             <table>
                                 <tr>
@@ -222,6 +232,7 @@
                         </div>
                     </div>
                     <div class="ui-block-c">
+                        <!-- Annual Energy Readout and Label-->
                         <div>
                             <table>
                                 <tr>
@@ -240,6 +251,7 @@
                 </div>
                 <div class="ui-grid-c ui-responsive">
                     <div class="ui-block-a">
+                        <!-- Select tag for Graphs Menu -->
                         <div id="getSelection">
                             <select id="graphsMenu" data-mini="true">
                                 <option value="Graphs">GRAPHS</option>
@@ -249,6 +261,7 @@
                         </div>
                     </div>
                     <div class="ui-block-b">
+                        <!-- Select tag for Readouts Menu -->
                         <div id="getSelection">
                             <select id="readoutsMenu" data-mini="true">
                                 <option value="Readouts">READOUTS</option>
@@ -258,6 +271,7 @@
                         </div>
                     </div>
                     <div class="ui-block-c">
+                        <!-- Select tag for Concepts Menu -->
                         <div id="getSelection">
                             <select id="conceptsMenu" onchange="onSelectConceptsMenu()" data-mini="true">
                                 <option value="Concepts">CONCEPTS</option>
@@ -272,6 +286,7 @@
                     </div>
                 </div>
                 <div class="ui-grid-solo">
+                    <!-- A div tag to show the information for the Concepts Menu -->
                     <div id="conceptsInfo"></div>
                 </div>
             </div>

@@ -5,7 +5,8 @@
 
     The purpose of this file is to provide styling to the different
     class and id elements. It is ordered starting with jQuery Mobile
-    classes followed by programmer defined class section.
+    classes followed by programmer defined class section which is 
+    followed by programmer defined id section.
 */
 
 /* jQuery Mobile classes              */
@@ -21,25 +22,30 @@
 }
 
 /* user-defined classes */
+/* Position the readout boxes */
 .readout {
   padding-left: 50px;
   width: 50px;
 }
 
+/* Position the big readout box */
 .bigReadout {
   padding-left: 50px;
   width: 75px;
 }
 
+/* Color for Select Menu options available */
 .available {
   color: #3104fb;
 }
 
+/* Color for Select Menu options unavailable */
 .unavailable {
   color: #d2cbcd;
 }
 
 /* user-defined ids */
+/* Position the Ship Crate image */
 #shipCrate {
   margin: auto;
   padding-left: 30px;
