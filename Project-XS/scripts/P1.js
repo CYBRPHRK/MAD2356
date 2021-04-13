@@ -134,7 +134,9 @@ function setup() {
   everythingHidden();
 }
 
-// Function that does the initial elevation canvas setup
+/*
+  The purpose of this function is to setup the initial elevation canvas.
+*/
 function elevationSetup() {
   // function to setup the elevation canvas
 
@@ -144,7 +146,9 @@ function elevationSetup() {
   createDoor();
 }
 
-//Function that makes the elevation view canvas
+/*
+  The purpose of this function is to make the elevation view canvas.
+*/
 function doElevation() {
   createDoor();
 
@@ -182,7 +186,10 @@ function doElevation() {
   }
 }
 
-//Function that clears and creates a door in the elevation canvas
+/*
+  The purpose of this function is to clear and create a door
+  in the elevation canvas.
+*/
 function createDoor() {
   // function to create door
   elevationCon.clearRect(0, 0, elevationObj.width, elevationObj.height);
@@ -211,7 +218,9 @@ function createDoor() {
   elevationCon.stroke();
 }
 
-// Function that does the initial elevation canvas setup
+/* 
+  The purpose of this function is to setup the initial Plan canvas.
+*/
 function planSetup() {
   planObj = document.getElementById("plan");
   planCon = planObj.getContext("2d");
